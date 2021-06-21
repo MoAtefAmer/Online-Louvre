@@ -9,9 +9,6 @@ const jwtPrivateKey = process.env.JWT_PRIVATE_KEY;
 
 
 
-
-
-
 passport.use(
   new JWTStrategy(
     {
@@ -21,13 +18,16 @@ passport.use(
 
     async (token, done) => {
       try {
-        const user = await User.findById(token.id);
+        const user = await User.findById(token.id).select("-password");
         if (!user) {
           return done(null, false, { message: 'User not found' });
         }
 
+       
+        
         return done(null, user);
       } catch (err) {
+        
         return done(err);
       }
     }

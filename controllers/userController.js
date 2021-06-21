@@ -3,7 +3,6 @@ const bcrypt = require('bcryptjs');
 const registerValidation = require('../validation/registerValidation');
 const loginValidation = require('../validation/loginValidation');
 const jwt = require('jsonwebtoken');
-const passport = require('passport');
 
 require('dotenv').config();
 
@@ -34,6 +33,12 @@ const register = async (req, res) => {
   // Hashing password
   const salt = await bcrypt.genSalt(10);
   const hashPassword = await bcrypt.hash(password, salt);
+
+  // Checking if phone number is unique
+  const phoneCheck = await User.findOne({ phone }).select('-password');
+  
+  if (phoneCheck)
+    return res.status(401).send({ message: 'Phone number already exists!' });
 
   // Creating new user in DB
   let newUser = new User({
@@ -73,18 +78,16 @@ const login = async (req, res) => {
   const token = jwt.sign(
     { id: user._id, username: user.username, userRole: user.userRole },
     jwtPrivateKey,
-    { expiresIn: 3600 }
+    { expiresIn: 3600 } // expires in an hour
   );
 
-  console.log(req.session)
   res.status(200).send({ message: 'Welcome!', token });
 };
 
 const test = async (req, res) => {
+ 
 
   return res.send('You authenticated!');
 };
-
-
 
 module.exports = { register, login, test };

@@ -8,11 +8,16 @@ const userController = require('../controllers/userController');
 
 const router = express.Router();
 
-router.get('/', userController.register);
 
+// Public Routes
+router.get('/', userController.register);
 router.post('/login', userController.login);
 
+
+//Private Routes
+
 router.get('/test', authenticateUser, userController.test);
+
 
 
 
