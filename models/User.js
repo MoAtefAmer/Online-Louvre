@@ -47,6 +47,11 @@ const userSchema = new mongoose.Schema({
         required:true,
     },
 
+    platform_id:{
+        type:'string',
+        
+    }
+
 });
 
 

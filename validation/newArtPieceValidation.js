@@ -1,24 +1,23 @@
 const { validator } = require('./requestDataValidator');
 
 const newArtPieceSchemaAjv = {
-  required: ['picture', 'artist', 'description'],
+  required: ['picture', 'artist', 'description', 'name'],
   properties: {
-   
-    artist:{
-        type:'string',
-        minLength:1,
-        maxLength:50,
+    artist: {
+      type: 'string',
+      minLength: 1,
+      maxLength: 50,
     },
-    description:{
-        type:'string',
-        minLength:1,
-        maxLength:1024,
-
+    description: {
+      type: 'string',
+      minLength: 1,
+      maxLength: 1024,
     },
-    picture:{
-            type:'string',
-            minLength:1,
-    }
+    picture: {
+      type: 'string',
+      minLength: 1,
+    },
+    name: { type: 'string', minLength: 1, maxLength: 50 },
   },
 };
 

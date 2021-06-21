@@ -14,6 +14,9 @@ const register = async (req, res) => {
   //TODO: email validation (if there is time)
 
   const { username, password, phone, userRole } = req.body;
+
+
+
   const reqData = req.body;
 
   // Validating input of request body
@@ -40,12 +43,16 @@ const register = async (req, res) => {
   if (phoneCheck)
     return res.status(401).send({ message: 'Phone number already exists!' });
 
+    const userCount = await User.countDocuments()+1;
+    
+  
   // Creating new user in DB
   let newUser = new User({
     username,
     password: hashPassword,
     phone,
     userRole,
+    platform_id:userCount,
   });
 
   await newUser.save();
@@ -84,10 +91,35 @@ const login = async (req, res) => {
   res.status(200).send({ message: 'Welcome!', token });
 };
 
-const test = async (req, res) => {
- 
 
-  return res.send('You authenticated!');
-};
 
-module.exports = { register, login, test };
+
+const getAllUsers = async (req,res)=>{
+
+  const userRole = req.user.userRole;
+
+  if (userRole != 'ADMIN') {
+    return res
+      .status(401)
+      .send({ message: 'Unauthorized Access! Must have admin privileges' });
+  }
+
+
+  const { pageLimit, pageNumber } = req.query;
+
+  if(!pageLimit) return res.status(400).send({message:"Please provide the page size!"})
+  if(!pageNumber) return res.status(400).send({message:"Please provide the page number!"})
+
+  const offset = (pageNumber - 1) * pageLimit;
+
+  const allUsers = await User.find().limit(parseInt(pageLimit)).skip(offset);
+
+
+
+  return res.status(200).send(allUsers);
+
+}
+
+
+
+module.exports = { register, login, getAllUsers };

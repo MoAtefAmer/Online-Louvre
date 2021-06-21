@@ -16,8 +16,8 @@ router.post('/login', userController.login);
 
 //Private Routes
 
-router.get('/test', authenticateUser, userController.test);
 
+router.get('/getUsers',authenticateUser,userController.getAllUsers)
 
 
 

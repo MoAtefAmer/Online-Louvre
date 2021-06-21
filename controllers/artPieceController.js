@@ -1,5 +1,6 @@
 const { uploadImage } = require('../middlewares/uploadImage');
 const { ArtPiece } = require('../models/ArtPiece');
+const fs = require('fs');
 
 const newArtPieceValidation = require('../validation/newArtPieceValidation');
 
@@ -21,6 +22,7 @@ const addNewArtPiece = async (req, res) => {
     artist: req.body.artist,
     description: req.body.description,
     picture: req.file.path,
+    name: req.body.name,
   };
 
   const validationErrors = newArtPieceValidation.validate(reqData);
@@ -35,6 +37,7 @@ const addNewArtPiece = async (req, res) => {
     picture: reqData.picture,
     artist: reqData.artist,
     description: reqData.description,
+    name: reqData.name,
   });
 
   await newArtPiece.save();
@@ -43,13 +46,118 @@ const addNewArtPiece = async (req, res) => {
 };
 
 const getAllArt = async (req, res) => {
-
   const { pageLimit, pageNumber } = req.query;
+
+  if (!pageLimit)
+    return res.status(400).send({ message: 'Please provide the page size!' });
+  if (!pageNumber)
+    return res.status(400).send({ message: 'Please provide the page number!' });
+
   const offset = (pageNumber - 1) * pageLimit;
 
-  const allPieces = await ArtPiece.find().limit(parseInt(pageLimit)).skip(offset);
+  const allPieces = await ArtPiece.find()
+    .limit(parseInt(pageLimit))
+    .skip(offset);
 
   return res.status(200).send(allPieces);
 };
 
-module.exports = { addNewArtPiece, getAllArt };
+const deleteArtPiece = async (req, res) => {
+  const { id } = req.body;
+
+  // Checking if art piece exists in db
+  const checkArtPiece = await ArtPiece.findById(id);
+  if (!checkArtPiece)
+    return res.status(404).send({ message: 'Art Piece does not exist!' });
+
+  // Deleting image attached to art piece
+  const picPath = checkArtPiece.picture;
+  fs.unlink(picPath, (err) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+  });
+
+  // Deleting art piece from db
+  await ArtPiece.findByIdAndDelete(id);
+
+  return res.status(200).send({ message: 'Art Piece removed!' });
+};
+
+const editArtPieceInfo = async (req, res) => {
+  const { userRole } = req.user;
+  const { id } = req.body;
+
+  if (userRole != 'ADMIN') {
+    return res
+      .status(401)
+      .send({ message: 'Unauthorized Access! Must have admin privileges' });
+  }
+
+  // Checking if art piece exists in db
+  let checkArtPiece = await ArtPiece.findById(id);
+
+  if (!checkArtPiece)
+    return res.status(404).send({ message: 'Art Piece does not exist!' });
+
+  const { artist, description, name } = req.body;
+
+  if (artist && artist.length > 0) checkArtPiece.artist = artist;
+
+  if (description && description.length > 0)
+    checkArtPiece.description = description;
+
+  if (name && name.length > 0) checkArtPiece.name = name;
+
+  await checkArtPiece.save();
+
+  return res.send({ message: 'Art Piece info edited successfully!' });
+};
+
+const editArtPiecePhoto = async (req, res) => {
+  const { userRole } = req.user;
+  const { id } = req.body;
+
+  if (userRole != 'ADMIN') {
+    return res
+      .status(401)
+      .send({ message: 'Unauthorized Access! Must have admin privileges' });
+  }
+
+  // Checking if art piece exists in db
+  const checkArtPiece = await ArtPiece.findById(id);
+  if (!checkArtPiece)
+    return res.status(404).send({ message: 'Art Piece does not exist!' });
+
+  if (!req.file)
+    return res
+      .status(404)
+      .send({ message: 'please choose a suitable file to upload' });
+
+  // Deleting image attached to art piece
+  const picPath = checkArtPiece.picture;
+  fs.unlink(picPath, (err) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+  });
+
+  if(req.file.path) checkArtPiece.picture = req.file.path
+
+await checkArtPiece.save();
+
+return res.status(200).send({message:"Photo edited Successfully!"})
+
+
+
+};
+
+module.exports = {
+  addNewArtPiece,
+  getAllArt,
+  deleteArtPiece,
+  editArtPieceInfo,
+  editArtPiecePhoto,
+};

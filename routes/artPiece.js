@@ -16,6 +16,11 @@ router.post('/addNewArtPiece',authenticateUser,uploadImage,artPieceController.ad
 
 router.get('/getAllArt',authenticateUser,artPieceController.getAllArt)
 
+router.delete('/deleteArtPiece',authenticateUser,artPieceController.deleteArtPiece)
+
+router.put('/editArtPieceInfo',authenticateUser,artPieceController.editArtPieceInfo)
+
+router.put('/editArtPiecePhoto',authenticateUser,uploadImage,artPieceController.editArtPiecePhoto)
 
 
 module.exports = router;
