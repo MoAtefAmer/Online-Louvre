@@ -1,13 +1,15 @@
 const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
-// const task = require('./routes/task')
+const user = require('./routes/user')
 
-const dotenv =require('dotenv').config()
+
+require('dotenv').config()
 
 
 
 const db = process.env.DB_HOST
+
 
 mongoose
   .connect(db,{useNewUrlParser:true,useUnifiedTopology:true,useFindAndModify:false})
@@ -26,7 +28,8 @@ app.use(function(req, res, next) {
     next();
   });
 
-// app.use('/api/task',task)
+app.use('/api',user)
+
 
 
 
