@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 const registerValidation = require('../validation/registerValidation');
 const loginValidation = require('../validation/loginValidation');
 const jwt = require('jsonwebtoken');
-
+const passport = require('passport');
 
 require('dotenv').config();
 
@@ -73,9 +73,10 @@ const login = async (req, res) => {
   const token = jwt.sign(
     { id: user._id, username: user.username, userRole: user.userRole },
     jwtPrivateKey,
-    { expiresIn: 86400 }
+    { expiresIn: 3600 }
   );
 
+  console.log(req.session)
   res.status(200).send({ message: 'Welcome!', token });
 };
 
@@ -83,5 +84,7 @@ const test = async (req, res) => {
 
   return res.send('You authenticated!');
 };
+
+
 
 module.exports = { register, login, test };

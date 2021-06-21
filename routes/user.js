@@ -14,4 +14,6 @@ router.post('/login', userController.login);
 
 router.get('/test', authenticateUser, userController.test);
 
+
+
 module.exports = router;
