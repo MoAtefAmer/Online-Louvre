@@ -1,0 +1,15 @@
+.loginBackground {
+  background-image: url('../Assets/login/bg.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100vw;
+  height: 100vh;
+}
+
+.loginFormStyle {
+  border-radius: 6px;
+  justify-content: center;
+  align-content: center;
+  
+}
