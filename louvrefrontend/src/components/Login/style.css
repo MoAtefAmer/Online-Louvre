@@ -1,0 +1,53 @@
+.loginFormStyle {
+  border-radius: 6px;
+  justify-content: center;
+  align-content: center;
+  position: relative;
+  max-width: 600px;
+  max-height: 550px;
+  padding: 240px 100px;
+  background-color: white;
+
+  margin: 0 auto;
+}
+
+
+
+
+
+hr{
+  background-color: #fff;
+  border: 0px;
+      height: 5px;
+      background-image: linear-gradient(90deg, #dedeed 19%, rgb(125, 34, 190) 50%, #dedeed 84%);
+transform: translateX(-40%);
+}
+
+.topSection {
+  position: relative;
+  bottom: 220px;
+  left: 150px;
+}
+
+.form {
+  transform: translateY(-7vh);
+}
+
+.button {
+  transform: translateY(3vw);
+}
+
+
+.labelText{
+  font-size: medium;
+  
+}
+
+
+.label{
+  transform: translateX(18px);
+}
+
+input, select, textarea{
+ color: purple;
+}
