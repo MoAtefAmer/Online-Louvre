@@ -6,7 +6,6 @@ import { Input, Form, Button } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 
 import { authActions } from '../../actions';
-import { authService } from '../../services';
 
 
 

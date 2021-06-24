@@ -1,9 +1,9 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { authService } from '../services';
 
 const check =
-  localStorage.getItem(authService.userRoleKey) == 'ADMIN'
+  localStorage.getItem(authService.userRoleKey) === 'ADMIN'
     ? "/dashboard"
     : "/gallery";
 export const PublicRoute = (props) => (

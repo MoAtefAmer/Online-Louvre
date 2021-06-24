@@ -7,7 +7,7 @@ import { Switch } from 'react-router'
 import { GuestRoute } from './routes/GuestRoute'
 import {AdminRoute} from './routes/AdminRoute'
 import { Gallery } from './containers/Login/Gallery/Gallery'
-import { httpService } from './services'
+
 
 
 export default class App extends Component {
