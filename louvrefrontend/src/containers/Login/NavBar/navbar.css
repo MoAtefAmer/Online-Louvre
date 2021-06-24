@@ -1,0 +1,26 @@
+/* Add a black background color to the top navigation */
+.topnav {
+    background-color:white;
+    overflow: hidden;
+    padding-bottom: 25px;
+    position: relative;
+  }
+  
+  /* Style the links inside the navigation bar */
+
+
+  .title{
+      transform: translate(7vw,20px);
+      position: absolute;
+    
+  }
+
+  .user{
+      transform: translate(90vw,0px);
+      
+  }
+
+  .role{
+    transform: translate(90vw,-10px);
+    color:#A9A9A9;
+  }

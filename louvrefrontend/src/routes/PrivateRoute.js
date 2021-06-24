@@ -1,19 +1,16 @@
 import React, { Fragment } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { authService } from '../services';
-
-
-export const PrivateRoute = ({ component: Component, ...rest }) => (
+ 
+export const PrivateRoute = (props) => (
     <Route
-        {...rest}
+      
         render={(props) =>
-            authService.getCurrentUser() ? (
-                <Fragment>
-                    <Component {...props} {...rest} />
-                </Fragment>
+            localStorage.getItem(authService.tokenKey)? (
+                props.component
             ) : (
                 <Redirect
-                    to={{ pathname: '/login', state: { from: props.location } }}
+                    to={{ pathname: '/', state: { from: props.location } }}
                 />
             )
         }

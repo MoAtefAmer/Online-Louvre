@@ -5,11 +5,12 @@ import { connect } from 'react-redux';
 // import { loginBackground,loginFormStyle } from './loginStyle';
 import './loginStyle.css';
 
-import LoginCard from '../../components/Login/LoginCard';
+import {LoginCard} from '../../components/Login/LoginCard';
 
 class LoginContainer extends Component {
   render() {
     console.log('yata');
+    
     return (
      
 

@@ -3,6 +3,7 @@ const app = express()
 const mongoose = require('mongoose')
 const user = require('./routes/user')
 const artPiece = require('./routes/artPiece')
+const cors = require('cors')
 
 
 require('dotenv').config()
@@ -24,13 +25,14 @@ mongoose
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
-
+app.options('*', cors())
 // Enabling CORS
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
   });
+
 
 
   // Routes

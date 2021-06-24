@@ -1,72 +1,69 @@
-import jwtDecode from "jwt-decode";
-import {httpService} from "./http.service";
-import {apiUrl} from "../config";
+import jwt from 'jwt-decode';
+import { httpService } from './http.service';
 
-const apiEndpoint = apiUrl + "/login";
-const tokenKey = "token";
-const refreshTokenKey = "refreshToken";
-const cancel = 'cancelRequests';
+const apiEndPoint = process.env.REACT_APP_BASE_URL;
+
+const apiLink = apiEndPoint + '/login';
+
+const tokenKey = 'token';
+const userRoleKey = 'userRole';
+const usernameKey ='username'
 
 export const authService = {
   login,
-  logout,
-  loginWithJwt,
-  getCurrentUser,
   getJwt,
-  removeJwtToken,
-  refreshToken,
-  setCancelRequests,
-  getCancelRequests,
+  logout,
+  getCurrentUserRole,
+  tokenKey,
+  userRoleKey,
+  usernameKey,
+  // getCurrentUser,
 };
 
-async function login(phone, password) {
-  const {data: jwt} = await httpService.post(apiEndpoint, {phone, password});
-  return jwt;
+async function login(username, password) {
+  const data = await httpService.post(apiLink, { username, password });
+  const authMsg = data.data;
+  const { token } = authMsg;
+
+  const user = jwt(token);
+
+//  const asd= await httpService.setJwt(token);
+//  console.log(asd)
+  localStorage.setItem(userRoleKey, user.userRole);
+  localStorage.setItem(tokenKey, token);
+  localStorage.setItem(usernameKey,user.username)
+
+  return data;
 }
 
 function logout() {
   localStorage.removeItem(tokenKey);
-  httpService.setJwt('');
-}
-
-async function loginWithJwt(jwt, refreshToken) {
-  localStorage.setItem(tokenKey, jwt);
-  if (refreshToken !== null) {
-    localStorage.setItem(refreshTokenKey, refreshToken);
-  }
-  httpService.setJwt(jwt);
-}
-
-function getCurrentUser() {
-  try {
-    const jwt = localStorage.getItem(tokenKey);
-    return jwtDecode(jwt).user;
-  } catch (ex) {
-    return null;
-  }
+  localStorage.removeItem(userRoleKey);
+  localStorage.removeItem(usernameKey)
+   httpService.setJwt('');
+  document.location.href('/')
 }
 
 function getJwt() {
   return localStorage.getItem(tokenKey);
 }
 
-function removeJwtToken() {
-  localStorage.removeItem(tokenKey);
-  httpService.setJwt('');
+function getCurrentUserRole() {
+  try {
+    const role = localStorage.getItem(userRoleKey);
+    return role;
+  } catch (ex) {
+    return null;
+  }
 }
 
-async function refreshToken() {
-  removeJwtToken();
-  const refreshToken = localStorage.getItem(refreshTokenKey);
-  const response = await httpService.post(`${apiEndpoint}/token`, { refreshToken });
-  if (response) loginWithJwt(response.data.token, null);
-  return response.data.token;
-}
+// function getCurrentUser() {
+//   try {
+//     const jwt = localStorage.getItem(tokenKey);
+//     const user = jwt(jwt);
+//     return user;
 
-function setCancelRequests(boolCancel) {
-  localStorage.setItem(cancel, boolCancel);
-}
-
-function getCancelRequests() {
-  return localStorage.getItem(cancel);
-}
+//   } catch (ex) {
+//     return null;
+//   }
+// }
