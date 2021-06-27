@@ -9,7 +9,7 @@ import {LoginCard} from '../../components/Login/LoginCard';
 
 class LoginContainer extends Component {
   render() {
-    console.log('yata');
+ 
     
     return (
      

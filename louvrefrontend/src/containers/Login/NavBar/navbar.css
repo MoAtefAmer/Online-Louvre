@@ -2,7 +2,7 @@
 .topnav {
     background-color:white;
     overflow: hidden;
-    padding-bottom: 25px;
+    
     position: relative;
   }
   
@@ -23,4 +23,18 @@
   .role{
     transform: translate(90vw,-10px);
     color:#A9A9A9;
+  }
+
+  .logout{
+    transform: translate(90vw,-20px);
+    color:#A9A9A9;
+    background: none!important;
+    border: none;
+    padding: 0!important;
+    /*optional*/
+    font-family: arial, sans-serif;
+    /*input has OS specific font-family*/
+    color: #069;
+    text-decoration: underline;
+    cursor: pointer;
   }

@@ -1,0 +1,40 @@
+.modal{
+    border-radius: 6px;
+    justify-content: center;
+    align-content: center;
+    position: relative;
+    max-width: 37vw;
+    max-height:10vh;
+    padding: 9vh 0px;
+    background-color: white;
+    transform: translateY(-10vh);
+
+  
+    margin: 0 auto;
+}
+
+
+.titleModal{
+    color: dodgerblue;
+    position: relative;
+    bottom:9vh;
+    left:1vw
+    
+    
+}
+
+.desc{
+    color:black;
+    transform: translateY(-7vh);
+    
+    
+}
+
+.closeButton{
+ 
+ border: none;
+  
+  cursor: pointer;
+  transform:translate(35vw,5vh);
+  
+}

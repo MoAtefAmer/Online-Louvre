@@ -1,13 +1,16 @@
+const cloudinary = require('cloudinary').v2;
 const multer = require('multer');
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, './images');
-  },
-  filename: (req, file, cb) => {
-    cb(null, file.originalname + '-' + Date.now());
-  },
-});
+// const storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, './images');
+//   },
+//   filename: (req, file, cb) => {
+//     cb(null, Date.now() + '-'+ file.originalname);
+//   },
+// });
 
+
+const storage = multer.diskStorage({});
 
 
 
@@ -34,6 +37,9 @@ const uploader = multer({
 
 
 const uploadImage = uploader.single('myImage');
+
+
+
 
 
 module.exports ={uploadImage}

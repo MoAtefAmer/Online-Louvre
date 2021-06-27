@@ -27,8 +27,7 @@ async function login(username, password) {
 
   const user = jwt(token);
 
-//  const asd= await httpService.setJwt(token);
-//  console.log(asd)
+
   localStorage.setItem(userRoleKey, user.userRole);
   localStorage.setItem(tokenKey, token);
   localStorage.setItem(usernameKey,user.username)
@@ -41,7 +40,9 @@ function logout() {
   localStorage.removeItem(userRoleKey);
   localStorage.removeItem(usernameKey)
    httpService.setJwt('');
-  document.location.href('/')
+    
+  //  window.location.reload();
+
 }
 
 function getJwt() {

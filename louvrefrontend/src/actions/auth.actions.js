@@ -1,8 +1,10 @@
 import { loginConstants } from '../constants';
 import { authService } from '../services';
+import { logoutConstants } from '../constants';
 
 export const authActions = {
   login,
+ logout,
 };
 
 function login(username, password) {
@@ -28,5 +30,34 @@ function login(username, password) {
 
   function failure(error) {
     return { type: loginConstants.LOGIN_FAILURE, error };
+  }
+}
+
+
+
+function logout() {
+  return async (dispatch) => {
+    await dispatch(request());
+    try {
+      await authService.logout();
+
+      dispatch(success());
+    } catch (ex) {
+      dispatch(failure(ex));
+    }
+  };
+
+  function request() {
+    return { type: logoutConstants.LOGOUT_REQUEST };
+  }
+
+  function success() {
+  
+    window.location.reload();
+    return { type: logoutConstants.LOGOUT_SUCCESS };
+  }
+
+  function failure(error) {
+    return { type: logoutConstants.LOGOUT_FAILURE, error };
   }
 }

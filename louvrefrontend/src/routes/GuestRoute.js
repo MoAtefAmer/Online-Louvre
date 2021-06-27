@@ -7,6 +7,7 @@ export const GuestRoute = (props) => (
     render={() =>
       localStorage.getItem(authService.userRoleKey) === 'GUEST' &&
       localStorage.getItem(authService.tokenKey) ? (
+        
         props.component
       ) : (
         <Redirect to={{ pathname: '/', state: { from: props.location } }} />

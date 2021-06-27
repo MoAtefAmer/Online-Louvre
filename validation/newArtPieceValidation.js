@@ -11,7 +11,7 @@ const newArtPieceSchemaAjv = {
     description: {
       type: 'string',
       minLength: 1,
-      maxLength: 1024,
+      maxLength: 750,
     },
     picture: {
       type: 'string',

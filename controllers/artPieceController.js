@@ -1,7 +1,6 @@
-const { uploadImage } = require('../middlewares/uploadImage');
 const { ArtPiece } = require('../models/ArtPiece');
 const fs = require('fs');
-
+const cloudinary = require('../middlewares/cloudinaryConfig');
 const newArtPieceValidation = require('../validation/newArtPieceValidation');
 
 const addNewArtPiece = async (req, res) => {
@@ -18,12 +17,22 @@ const addNewArtPiece = async (req, res) => {
       .status(404)
       .send({ message: 'please choose a suitable file to upload' });
 
-  const reqData = {
-    artist: req.body.artist,
-    description: req.body.description,
-    picture: req.file.path,
-    name: req.body.name,
-  };
+      const reqData = {
+        artist: req.body.artist,
+        description: req.body.description,
+        picture: '',
+        name: req.body.name,
+      };
+
+  try {
+    const result = await cloudinary.uploader.upload(req.file.path);
+    reqData.picture =result.secure_url
+    
+  } catch (ex) {
+    console.log(ex)
+  }
+
+  
 
   const validationErrors = newArtPieceValidation.validate(reqData);
   if (validationErrors) {
@@ -55,11 +64,15 @@ const getAllArt = async (req, res) => {
 
   const offset = (pageNumber - 1) * pageLimit;
 
+  const docCount = await ArtPiece.countDocuments();
+
+const count = Math.ceil(docCount/pageLimit)
+
   const allPieces = await ArtPiece.find()
     .limit(parseInt(pageLimit))
     .skip(offset);
 
-  return res.status(200).send(allPieces);
+  return res.status(200).send({ allPieces, count });
 };
 
 const deleteArtPiece = async (req, res) => {
@@ -144,14 +157,11 @@ const editArtPiecePhoto = async (req, res) => {
     }
   });
 
-  if(req.file.path) checkArtPiece.picture = req.file.path
+  if (req.file.path) checkArtPiece.picture = req.file.path;
 
-await checkArtPiece.save();
+  await checkArtPiece.save();
 
-return res.status(200).send({message:"Photo edited Successfully!"})
-
-
-
+  return res.status(200).send({ message: 'Photo edited Successfully!' });
 };
 
 module.exports = {

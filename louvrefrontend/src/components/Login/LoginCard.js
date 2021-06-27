@@ -70,11 +70,11 @@ handleSubmit = async (e) => {
 };
 render(){
 
-console.log(this.state)
+
 
 // localStorage.setItem("token","")
 // localStorage.setItem("userRole","")
-console.log(localStorage.getItem("token"))
+
 // console.log(authService.getCurrentUser())
   return (
     <div className="loginFormStyle">

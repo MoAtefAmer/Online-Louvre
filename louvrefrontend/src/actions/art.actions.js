@@ -5,16 +5,16 @@ export const artActions = {
     getAllArt,
 };
 
-function getAllArt() {
+function getAllArt(pageNumber,pageLimit) {
   return async (dispatch) => {
     await dispatch(request());
-    console.log("art")
+ 
     try {
-        console.log("2")
-    const art=  await artService.getAllArt();
+       
+    const art=  await artService.getAllArt(pageNumber,pageLimit);
   
 
-      dispatch(success(art));
+      dispatch(success(art.data));
     } catch (ex) {
       dispatch(failure(ex));
     }
