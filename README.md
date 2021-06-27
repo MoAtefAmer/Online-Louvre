@@ -7,7 +7,7 @@ An online web-application that allows you to view art!
 .env example:
 
 - DB_HOST=mongoURI
-- JWT_PRIVATE_KEY=privateKey
+- JWT_PRIVATE_KEY=privateKey (any complex string)
 - CLOUDINARY_CLOUD_NAME=cloudinaryname
 - CLOUDINARY_API_KEY =cloudinaryapikey
 - CLOUDINARY_API_SECRET =cloudinarySeceret
