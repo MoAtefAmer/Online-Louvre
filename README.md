@@ -29,3 +29,12 @@ An online web-application that allows you to view art!
 
 5- you will find an "Apis.json" file which contains the api endpoints for the backend. You can import it in postman and use the requests to perform crud operations on the backend instead of using the frontend
 
+
+## Screenshots
+
+![](images/pic1.png)
+![](images/pic2.png)
+![](images/pic3.png)
+![](images/pic4.png)
+![](images/pic5.png)
+![](images/pic6.png)
