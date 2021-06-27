@@ -6,11 +6,11 @@ An online web-application that allows you to view art!
 
 .env example:
 
-DB_HOST=mongoURI
-JWT_PRIVATE_KEY=privateKey
-CLOUDINARY_CLOUD_NAME=cloudinaryname
-CLOUDINARY_API_KEY =cloudinaryapikey
-CLOUDINARY_API_SECRET =cloudinarySeceret
+- DB_HOST=mongoURI
+- JWT_PRIVATE_KEY=privateKey
+- CLOUDINARY_CLOUD_NAME=cloudinaryname
+- CLOUDINARY_API_KEY =cloudinaryapikey
+- CLOUDINARY_API_SECRET =cloudinarySeceret
 
 
 2- copy the other .env file in the client folder (frontend)
