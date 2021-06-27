@@ -29,6 +29,27 @@ export default function art(state = initialState, action) {
         error: action.error,
       };
 
+
+      case artConstants.DELETE_ART_REQUEST:
+        return {
+          ...state,
+        };
+  
+      case artConstants.DELETE_ART_SUCCESS:
+        return {
+          ...state,
+          isLoaded:action.isLoaded,
+          art: action.art,
+          
+        };
+  
+      case artConstants.DELETE_ART_FAILURE:
+        return {
+          ...state,
+          isLoaded:action.isLoaded,
+          error: action.error,
+        };
+
  
     default:
       return { ...state };

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavBar } from '../NavBar/NavBar';
-import { authService } from '../../../services/auth.service';
-import { artActions } from '../../../actions/art.actions';
+import { authService } from '../../services/auth.service';
+import { artActions } from '../../actions/art.actions';
 import { Grid,  Pagination } from 'semantic-ui-react';
-import { GalleryCard } from '../../../components/Gallery/Card';
+import { GalleryCard } from '../../components/Gallery/Card';
 
 class Gallery extends Component {
   componentDidMount() {

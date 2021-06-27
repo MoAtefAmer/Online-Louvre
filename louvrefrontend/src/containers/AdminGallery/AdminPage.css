@@ -1,0 +1,83 @@
+.supervisedArtUnClicked{
+    background-color:white;
+  
+    color: white;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 1px solid black;
+}
+
+.supervisedArtClicked{
+    background-color:#553C7B;
+   
+    color: white;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+
+.userButtonUnclicked{
+    background-color:white;
+  
+    color: white;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 1px solid black;
+}
+
+.userButtonClicked{
+    background-color:#553C7B;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btnGroup{
+    position: relative;
+    left:1vw;
+    top:2vh;
+
+}
+
+.thumbnail{
+   
+    border-radius: 4px;
+    padding: 5px;
+    width: 100px;
+}
+
+.seedeets{
+    background: none!important;
+    border: none;
+    padding: 0!important;
+    /*optional*/
+    font-family: arial, sans-serif;
+    /*input has OS specific font-family*/
+    color: purple;
+    
+    cursor: pointer;
+}

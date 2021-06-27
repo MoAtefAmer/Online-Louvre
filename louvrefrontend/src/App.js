@@ -6,13 +6,14 @@ import { Switch } from 'react-router'
 
 import { GuestRoute } from './routes/GuestRoute'
 import {AdminRoute} from './routes/AdminRoute'
-import { Gallery } from './containers/Login/Gallery/Gallery'
+import { Gallery } from './containers/Gallery/Gallery'
+import {AdminPage} from './containers/AdminGallery/AdminPage'
 
 
 
 export default class App extends Component {
   render() {
-    console.log("asd")
+  
 // localStorage.removeItem("token")
 // localStorage.removeItem("userRole")
 // localStorage.removeItem("username")
@@ -23,7 +24,7 @@ return (
         <Switch>
           <PublicRoute path="/" component={<LoginPage/>} exact  />
           <GuestRoute path="/gallery" component={<Gallery/>} />
-          <AdminRoute path="/dashboard" component={<div>dashboard</div>}/>
+          <AdminRoute path="/dashboard" component={<AdminPage/>}/>
         </Switch>
       </React.Fragment>
      

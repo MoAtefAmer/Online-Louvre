@@ -6,6 +6,7 @@ const apiLink = apiEndPoint + '/art';
 
 export const artService = {
   getAllArt,
+  deleteArtPiece,
 };
 
 
@@ -28,4 +29,14 @@ async function getAllArt(pageNumber, pageLimit) {
 
 
   return data;
+}
+
+
+async function deleteArtPiece(body){
+ 
+
+const data = await httpService.delete(`${apiLink}/deleteArtPiece`,{data:{id:body.id}});
+
+return data;
+
 }

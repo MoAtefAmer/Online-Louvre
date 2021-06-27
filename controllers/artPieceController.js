@@ -84,14 +84,15 @@ const deleteArtPiece = async (req, res) => {
     return res.status(404).send({ message: 'Art Piece does not exist!' });
 
   // Deleting image attached to art piece
-  const picPath = checkArtPiece.picture;
-  fs.unlink(picPath, (err) => {
-    if (err) {
-      console.error(err);
-      return;
-    }
-  });
+  // const picPath = checkArtPiece.picture;
+  // fs.unlink(picPath, (err) => {
+  //   if (err) {
+  //     console.error(err);
+  //     return;
+  //   }
+  // });
 
+ 
   // Deleting art piece from db
   await ArtPiece.findByIdAndDelete(id);
 

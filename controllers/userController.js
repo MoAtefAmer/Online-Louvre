@@ -114,9 +114,13 @@ const getAllUsers = async (req,res)=>{
 
   const allUsers = await User.find().limit(parseInt(pageLimit)).skip(offset);
 
+  const docCount = await User.countDocuments();
+
+  const count = Math.ceil(docCount/pageLimit)
 
 
-  return res.status(200).send(allUsers);
+
+  return res.status(200).send({allUsers,count});
 
 }
 

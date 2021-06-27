@@ -29,6 +29,10 @@ function login(username, password) {
   }
 
   function failure(error) {
+    let x = document.getElementById('snackbar');
+    x.className = 'show';
+    x.textContent ="Email or Password entered incorrectly!"
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
     return { type: loginConstants.LOGIN_FAILURE, error };
   }
 }

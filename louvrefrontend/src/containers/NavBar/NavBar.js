@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './navbar.css'
-import { authActions } from '../../../actions';
+import { authActions } from '../../actions';
  class NavBar extends Component {
 
 
@@ -21,6 +21,7 @@ handleLogout = async(e)=>{
        <h4 className="user">{username}</h4>
      <p className="role">{role}</p>
      <button className="logout" onClick={this.handleLogout}>Logout</button>
+     
       </div>
     );
   }
