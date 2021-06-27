@@ -2,7 +2,7 @@
 An online web-application that allows you to view art!
 
 ## How to run
-1- copy .env file in the api folder (backend)
+1- copy ".env" file in the api folder (backend)
 
 .env example:
 
@@ -13,7 +13,7 @@ An online web-application that allows you to view art!
 - CLOUDINARY_API_SECRET =cloudinarySeceret
 
 
-2- copy the other .env file in the client folder (frontend)
+2- copy the other ".env" file in the client folder (frontend)
  
  .env example:
   - REACT_APP_BASE_URL = "http://localhost:3000/api"
